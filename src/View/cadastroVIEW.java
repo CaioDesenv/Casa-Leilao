@@ -130,8 +130,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
             ProdutosDTO produtos = new ProdutosDTO();
-        
-            conectaDAO dao =new conectaDAO();
+            ProdutosDAO daoProduto = new ProdutosDAO();
+            conectaDAO dao = new conectaDAO();
             
             boolean status;
             int resposta;
@@ -146,7 +146,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Erro de conexão");
                 
             }else{
-                resposta = dao.salvar(produtos);
+                resposta = daoProduto.salvar(produtos);
                 
                 if(resposta == 1){
                     JOptionPane.showMessageDialog(null,"Dados incluidos com sucesso");
