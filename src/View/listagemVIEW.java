@@ -1,16 +1,24 @@
 package View;
 
+import Controller.ProdutosDTO;
 import DAO.ProdutosDAO;
 import DAO.conectaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class listagemVIEW extends javax.swing.JFrame {
     ProdutosDAO conProduto;
+    ProdutosDTO DTO;
+    conectaDAO dao;
+    
+    private PreparedStatement st;
+    private ResultSet rs;
     
     public listagemVIEW() {
         initComponents();
@@ -134,6 +142,13 @@ public class listagemVIEW extends javax.swing.JFrame {
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         
+        try {
+            alteraStatus();
+            consultaID();
+        } catch (SQLException ex) {
+            Logger.getLogger(listagemVIEW.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
@@ -175,7 +190,7 @@ public class listagemVIEW extends javax.swing.JFrame {
         
         int idProduto = Integer.parseInt(txtID.getText());
         PreparedStatement st;
-         ResultSet rs;
+        ResultSet rs;
          
         try{
             Connection con = conectaDAO.Conexao();
@@ -202,10 +217,6 @@ public class listagemVIEW extends javax.swing.JFrame {
                 
     }
     public void listaODBC(){
-        
-       
-        PreparedStatement st;
-        ResultSet rs;
          
         try{
             Connection con = conectaDAO.Conexao();
@@ -224,9 +235,36 @@ public class listagemVIEW extends javax.swing.JFrame {
                 rs.getString("status")
                 });
             }
+            rs.close();
+            con.close();
             
         } catch (SQLException e){
             e.printStackTrace();
         }
     }
+    
+    public void alteraStatus() throws SQLException{
+        
+        int idProduto = Integer.parseInt(txtID.getText());
+        Connection con = conectaDAO.Conexao();
+        
+        PreparedStatement ps = null;
+        String sql = "update produtos set status = 'Vendido' where id = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,idProduto);
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,"Dados atualizados com sucesso");
+            
+            ps.close();
+            con.close();
+            
+        } catch ( SQLException sqle ) {
+            JOptionPane.showMessageDialog(null,"Erro ao tentar inserir dados");
+        }
+        
+     }
+    
 }
