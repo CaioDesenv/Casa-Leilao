@@ -128,39 +128,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-            ProdutosDTO produtos = new ProdutosDTO();
-            conectaDAO dao = new conectaDAO();
-            
-            boolean status;
-            int resposta;
-            
-            produtos.setNome(txtNome.getText());
-            produtos.setValor(Integer.parseInt(txtValor.getText()));
-            produtos.setStatus("A Venda");
-            
-            status = dao.conectar();
-            
-            if(status == false){
-                JOptionPane.showMessageDialog(null,"Erro de conexão");
-                
-            }else{
-                resposta = dao.salvar(produtos);
-                
-                if(resposta == 1){
-                    JOptionPane.showMessageDialog(null,"Dados incluidos com sucesso");
-                    //limpar os campos
-                    txtValor.setText("");
-                    txtNome.setText("");
-                    //posicionar o cursor para um próximo
-                    txtNome.requestFocus();
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null,"Erro ao tentar inserir dados");
-                    
-                }
-                dao.desconectar();
-            }
-        
+          Cadastrar(); 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
@@ -189,4 +157,39 @@ public class cadastroVIEW extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+    
+    public void Cadastrar(){
+        ProdutosDTO produtos = new ProdutosDTO();
+        conectaDAO dao = new conectaDAO();
+
+        boolean status;
+        int resposta;
+
+        produtos.setNome(txtNome.getText());
+        produtos.setValor(Integer.parseInt(txtValor.getText()));
+        produtos.setStatus("A Venda");
+
+        status = dao.conectar();
+
+        if(status == false){
+            JOptionPane.showMessageDialog(null,"Erro de conexão");
+
+        }else{
+            resposta = dao.salvar(produtos);
+
+            if(resposta == 1){
+                JOptionPane.showMessageDialog(null,"Dados incluidos com sucesso");
+                //limpar os campos
+                txtValor.setText("");
+                txtNome.setText("");
+                //posicionar o cursor para um próximo
+                txtNome.requestFocus();
+
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao tentar inserir dados");
+
+            }
+            dao.desconectar();
+        }
+    }
 }
