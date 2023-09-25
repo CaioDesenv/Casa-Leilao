@@ -1,12 +1,11 @@
 package View;
 
-import DAO.ProdutosDAO;
 import Controller.ProdutosDTO;
 import DAO.conectaDAO;
 import javax.swing.JOptionPane;
 
 public class cadastroVIEW extends javax.swing.JFrame {
-
+    
     public cadastroVIEW() {
         initComponents();
     }
@@ -130,7 +129,6 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
             ProdutosDTO produtos = new ProdutosDTO();
-            ProdutosDAO daoProduto = new ProdutosDAO();
             conectaDAO dao = new conectaDAO();
             
             boolean status;
@@ -146,7 +144,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Erro de conexão");
                 
             }else{
-                resposta = daoProduto.salvar(produtos);
+                resposta = dao.salvar(produtos);
                 
                 if(resposta == 1){
                     JOptionPane.showMessageDialog(null,"Dados incluidos com sucesso");

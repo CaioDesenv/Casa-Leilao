@@ -1,7 +1,6 @@
 package View;
 
 import Controller.ProdutosDTO;
-import DAO.ProdutosDAO;
 import DAO.conectaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class listagemVIEW extends javax.swing.JFrame {
-    ProdutosDAO conProduto;
     ProdutosDTO DTO;
     conectaDAO dao;
     
