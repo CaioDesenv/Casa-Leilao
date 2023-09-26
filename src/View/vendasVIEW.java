@@ -59,7 +59,7 @@ public class vendasVIEW extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "id", "nome", "valor", "status"
+                "ID", "Nome", "Valor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
